@@ -1,6 +1,2 @@
 *.exe filter=lfs diff=lfs merge=lfs -text
-<<<<<<< HEAD
-opencv/* linguist-vendored
-=======
-*.cpp linguist-detectable=false
->>>>>>> 61831884d5c4fe1883845886f4015369cdb4054d
+opencv/build/* linguist-vendored
