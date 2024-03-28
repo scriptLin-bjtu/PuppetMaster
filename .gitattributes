@@ -1,2 +1,4 @@
 *.exe filter=lfs diff=lfs merge=lfs -text
 opencv/* linguist-vendored
+*.cpp linguist-detectable=false 
+*.c  linguist-detectable=false 
