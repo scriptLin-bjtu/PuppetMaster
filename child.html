@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			body{
+				cursor:crosshair;
+			}
+		</style>
+	</head>
+	<body>
+		<img id="image" src="" alt="Image" />
+		<script>
+			document.getElementById('image').addEventListener('click', (event) => {
+				const rect = event.target.getBoundingClientRect();
+				const xRatio = (event.clientX - rect.left) / rect.width;
+				const yRatio = (event.clientY - rect.top) / rect.height;
+				console.log(xRatio + '  ' + yRatio);
+				window.childapi.click(xRatio, yRatio);
+			});
+		</script>
+	</body>
+</html>

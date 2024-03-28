@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link href="bootstrap/bootstrap.min.css" rel="stylesheet">
+		<link href="style.css" rel="stylesheet" />
+		<title></title>
+	</head>
+	<body style="background-color: beige;">
+		<div class="container-fluid">
+			<div class="row" style="height: 100vh;">
+				<div class="navbar  col-2">
+					<ul class="nav flex-column" style="width: 100%;">
+						<button type="button" class="btn btn-outline-success active-btn" id="t-flow">临时流</button>
+						<button type="button" class="btn btn-outline-success" id="w-flow">工作流</button>
+						<button type="button" class="btn btn-outline-success" id="setting">设置</button>
+					</ul>
+				</div>
+				<div class="col-6" style="border: 1px solid moccasin; overflow-y: auto; max-height: 75%;">
+					<!---临时事件流div---->
+					<div id="tflowdiv" style="display: block;">
+						<div>
+							<table class="table table-hover textlabel">
+							  <thead>
+								  <tr>
+									  <th>事件类型</td>
+									  <th>事件描述</th>
+									  <th>管理</th>
+								  </tr>
+							  </thead>
+							  <tbody id="tablebody">
+								  
+							  </tbody>
+							</table>
+						</div>
+						<!----本地保存按钮---->
+						<button id="store_btn" class="btn btn-outline-success" style="border-radius:0%; position: absolute; bottom: 25%; right: 35%; z-index: 3;">本地保存</button>
+						<button id="sweep_btn" class="btn btn-outline-success" style="border-radius:0%; position: absolute; bottom: 25%; right: 45%; z-index: 3;">全部删除</button>
+					</div>
+					<!---本地事件流div---->
+					<div id="wflowdiv" style="display:none;">
+						<div id="file_read">
+							<label for="fileInput" class="form-label">选择本地的事件流文件</label>
+							<input class="form-control" type="file" id="fileInput" accept=".json">
+							<button id="startflow_btn" class="btn btn-outline-success" style="margin-top: 5%;" disabled>执行</button>
+							<button id="edit_btn" class="btn btn-outline-success" style="margin-top: 5%;" disabled>编辑</button>
+						</div>
+					</div>
+					<!---设置div---->
+					<div id="settingdiv" style="display:none;">
+						<button class="btn btn-outline-success" id="clean_btn" style="border-radius: 0%;">清除缓存</button>
+						<button class="btn btn-outline-success" id="about_btn" style="border-radius: 0%;">关于</button>
+						<div>
+							<label id="about_label"  style="display: none;"></label>
+						</div>
+					</div>
+				</div>
+				<div class="col-4" id="tflow-setting" style="display: block;">
+					<div class="change_event" style="border: 1px solid moccasin;">
+						<button class="btn btn-outline-success active-btn" id="event_mouse">鼠标点击</button>
+						<button class="btn btn-outline-success" id="event_scoll">鼠标滚轮</button>
+						<button class="btn btn-outline-success" id="event_key">键盘点击</button>
+						<button class="btn btn-outline-success" id="event_break">添加间隔</button>
+					</div>
+					<!---鼠标部分--->
+					<div style="margin-top: 2rem;margin-bottom: 1rem; display: block;" id="mousediv">
+						<img id="imgshow" class="showimg"/>
+						<div>
+							<label class="textlabel" for="imageInput">选择匹配图片(.png)</label>
+							<button class="btn btn-success" style="border: none;border-radius: 0%" id="screenshot">截图</button>
+							<button class="btn btn-success" style="border: none;border-radius: 0%" id="set_target" disabled>设置锚点</button>
+							<input class="form-control" id="imageInput" type="file" accept="image/*"/>
+						</div>
+						<div>
+							<label class="textlabel" for="clicktimesInput">点击次数</label>
+							<input class="form-control" id="clicktimesInput" value="1" type="number" min="1" max="100" step="1"/>
+						</div>
+						<div>
+							<label class="textlabel" for="clickintervalInput">点击间隔(毫秒)</label>
+							<input class="form-control" id="clickintervalInput" value="1000" type="number" min="100"/>
+						</div>
+						<div>
+							<label class="textlabel" for="macthintervalInput">匹配间隔(毫秒)</label>
+							<input class="form-control" id="macthintervalInput" value="1000" type="number" min="100"/>
+						</div>
+						<div>
+							<label class="textlabel">鼠标右键</label>
+							<input class="form-check-input" id="rightmouseCheck" type="checkbox"/>
+							<label class="textlabel">是否长按</label>
+							<input class="form-check-input" id="togglemouseCheck" type="checkbox"/>
+							<div id="toggle" style="display: none;">
+								<label class="textlabel">长按时长(毫秒)</label>
+								<input class="form-control-sm" id="togglemouseInput" value="2000" type="number" min="1000" max="60000"/>
+							</div>
+						</div>
+					</div>
+					<!---滚轮部分--->
+					<div style="margin-top: 2rem;margin-bottom: 1rem; display: none;" id="scolldiv">
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="scoll" id="upscollcheck" checked/>
+							<label class="form-check-label textlabel" for="upscollcheck">向上滚动</label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="scoll" id="downscollcheck"/>
+							<label class="form-check-label textlabel" for="downscollcheck">向下滚动</label>
+						</div>
+						<div >
+							<label class="textlabel">滚动单位</label>
+							<input class="form-control" type="number" id="scollinput" min="1" value="1"/>
+						</div>
+					</div>
+					<!---键盘部分--->
+					<div style="margin-top: 2rem;margin-bottom: 1rem; display: none;" id="keydiv">
+						<button class="btn btn-outline-success" id="getmoreinf" style="border: none;border-radius: 0%;float: right;">帮助</button>
+						<div>
+							<label class="textlabel">输入你的按键</label>
+							<input class="form-control" type="text" placeholder="点击并在这里按下" id="keytype">
+							<div id="suggestions">
+							    <ul id="suggestionList"></ul>
+							</div>
+						</div>
+						<div>
+							<label class="textlabel">点击次数</label>
+							<input class="form-control" type="number" id="typetimes" value="1" min="1" max="100"/>
+						</div>
+						<div>
+							<label class="textlabel">点击间隔(毫秒)</label>
+							<input class="form-control" type="number" id="typeinterval" value="1000" min="100" max="10000"/>
+						</div>
+						<div>
+							<label class="textlabel">是否长按</label>
+							<input type="checkbox" class="form-check-input" id="togglekeyCheck"/>
+							<label class="textlabel">长文本输入</label>
+							<input type="checkbox" class="form-check-input" id="stringcheck"/>
+						</div>
+						<div id="togglekey" style="display: none;">
+							<label class="textlabel">长按时长(毫秒)</label>
+							<input class="form-control-sm" id="togglekeyInput" value="2000" type="number" min="1000" max="60000"/>
+						</div>
+						<div id="stringdiv" style="display: none;">
+							<label class="textlabel">输入一段字符</label>
+							<input class="form-control" type="text" id="stringinput" value="string"/>
+						</div>
+					</div>
+					<!---间隔部分---->
+					<div  style="margin-top: 2rem;margin-bottom: 1rem; display: none;" id="breakdiv">
+						<label class="textlabel">间隔时长(毫秒)</label>
+						<input class="form-control" id="breaktime" type="number" value="2000" min="1000" max="60000"/>
+					</div>
+					<button type="button" class="btn btn-outline-success" id="add_btn" style="position: fixed; bottom: 25%; right: 2%; z-index: 3;">添加事件</button>
+					<button type="button" class="btn btn-outline-success" id="match_btn" style="position: fixed; bottom: 5%; right: 2%; z-index: 3;">开始匹配</button>
+					
+				</div>
+				<!---消息台与提交按钮--->
+				<div style="position: fixed; bottom: 0; left: 16.666%; width: 100%; border: 1px solid;border-color: moccasin; z-index: 2;">
+					<label for="console_platform" class="form-label" style="color: cadetblue;margin-left: 1rem;">消息台</label>
+							
+					<textarea class="form-control" id="console_platform" rows="4" readonly
+						style="color: darkolivegreen;border-radius: 0%;"></textarea>
+				</div>
+			</div>
+		</div>
+
+		<script src="renderer.js"></script>
+		<script src="bootstrap/bootstrap.bundle.min.js"></script>
+	</body>
+
+</html>

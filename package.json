@@ -1,0 +1,38 @@
+{
+  "name": "PuppetMaster",
+  "version": "1.0.0",
+  "author": "scriptLin",
+  "description": "Your Electron Application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "electron-rebuild": "build-opencv --electron --version 4.5.4 build",
+    "install_arm64": "build-opencv --version 4.5.4 --flag=\"-DCMAKE_SYSTEM_PROCESSOR=arm64 -DCMAKE_OSX_ARCHITECTURES=arm64\" build",
+    "install_4.5.5_cuda": "build-opencv --version 4.5.5 --flags=\"-DWITH_CUDA=ON -DWITH_CUDNN=ON -DOPENCV_DNN_CUDA=ON -DCUDA_FAST_MATH=ON\" build",
+    "do-install": "build-opencv build",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.3.1",
+    "@electron-forge/maker-deb": "^7.3.1",
+    "@electron-forge/maker-rpm": "^7.3.1",
+    "@electron-forge/maker-squirrel": "^7.3.1",
+    "@electron-forge/maker-zip": "^7.3.1",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.3.1",
+    "@electron-forge/plugin-fuses": "^7.3.1",
+    "@electron/rebuild": "^3.6.0",
+    "electron": "^20.0.0"
+  },
+  "opencv4nodejs": {
+    "disableAutoBuild": 1,
+    "opencvIncludeDir": "D:\\opencv\\opencv\\build\\include",
+    "opencvLibDir": "D:\\opencv\\opencv\\build\\x64\\vc16\\lib",
+    "opencvBinDir": "D:\\opencv\\opencv\\build\\x64\\vc16\\bin"
+  },
+  "dependencies": {
+    "@u4/opencv4nodejs": "^6.5.3",
+    "electron-squirrel-startup": "^1.0.0",
+    "robotjsfix": "^0.6.1"
+  }
+}
