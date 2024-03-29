@@ -22,14 +22,15 @@ PuppeteMaster是一款Windows系统下的桌面应用程序，主要实现无代
 ---
 ## 在工程环境下打开
 1. 将本仓库clone到本地
-2. 在项目目录下，执行
+2. 解压opencv.zip到当前目录
+3. 在项目目录下，执行
 ```npm install```
   安装项目依赖,如果失败，请参考[文章](https://juejin.cn/post/7344572677393629222)
  
-3. 对依赖进行重构(参考上面的文章)
-4. 执行
+4. 对依赖进行重构(参考上面的文章)
+5. 执行
    ```npm run start```
-5. PuppetMaster使用Electron Forge进行打包,如需打包请执行```npm run make```
+6. PuppetMaster使用Electron Forge进行打包,如需打包请执行```npm run make```
 
 ---
 ## 说明
