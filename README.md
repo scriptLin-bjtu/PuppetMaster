@@ -41,5 +41,4 @@ PuppeteMaster是一款Windows系统下的桌面应用程序，主要实现无代
 3. 仅为学习学习项目，不用做商用。
 4. PuppetMaster在执行的描点在桌面最上层,因此无法后台操作，但是可以通过windows系统的多桌面功能进行后台操作。
 5. 开发不易，如果你觉得有用，可以请我喝一杯咖啡
-<img src="reward2.jpg" width="300px" >
-<img src="reward1.jpg" width="300px" >
+
